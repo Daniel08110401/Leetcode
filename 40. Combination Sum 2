@@ -1,0 +1,33 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        
+        # each number can only be used once
+        candidates.sort()
+
+        result = []
+
+        def backtrack(cur, pos, target):
+            if target == 0:
+                result.append(cur.copy())
+                return
+            if target <= 0:
+                return
+
+            # set to -1 so that as a default, candidates[i] !== prev
+            prev = -1
+
+            for i in range(pos, len(candidates)):
+                # we will include the candidate if there's no duplicate
+                if candidates[i] == prev:
+                    continue
+
+                # where we subtract the current element from the target and recursively run the function
+                cur.append(candidates[i])
+                backtrack(cur, i + 1, target - candidates[i])
+                cur.pop()
+
+                prev = candidates[i]
+
+        backtrack([], 0, target)
+        print(result)
+        return result
