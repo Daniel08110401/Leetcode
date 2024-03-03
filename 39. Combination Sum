@@ -1,0 +1,25 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+
+        def dfs(currentSum, subArray, pos):
+
+            ## exit cases
+            # combinationSum = target
+            if currentSum == target:
+                result.append(subArray[::])
+                return
+            
+            # combinationSum > target or pos >= len(candidates)
+            if pos >= len(candidates) or currentSum > target:
+                return
+            
+            subArray.append(candidates[pos])
+            dfs(currentSum + candidates[pos], subArray, pos)
+
+            subArray.pop()
+            dfs(currentSum, subArray, pos + 1)
+        
+        dfs(0, [], 0)
+        print(result)
+        return result
