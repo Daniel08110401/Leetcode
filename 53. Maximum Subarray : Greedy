@@ -1,0 +1,19 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        # use greedy or DP
+
+        # as there's an repeating calculation, we will create another array to store the values and use that
+
+
+        # Kadane's Algorithm
+        # Keep the current sum max as we want the maximum value
+    
+        maxSum = nums[0]
+        currentSum = 0
+
+        for n in nums:
+            currentSum = max(currentSum, 0) # this is to not consider negative value by comparing with zero
+            currentSum += n
+            maxSum = max(currentSum, maxSum)
+        return maxSum
