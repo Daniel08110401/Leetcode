@@ -1,0 +1,27 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+       result = []
+       # base case
+       # if only 1 number is given, return that number
+       if len(nums) == 1:
+           return [nums[:]]
+
+
+        for i in range(len(nums)):
+            # remove the first number from the nums list
+            n = nums.pop(i)
+
+            # with the remaining 2 numbers, create possible permuatations
+            perms = self.permute(nums)
+
+            # place back the number that we removed
+            for perm in perms:
+                perm.append(n)
+            
+            # add the possible permutations into the result
+            result.extend(perms)
+
+            # add back the removed number into the nums list
+            nums.append(n)
+        
+        return result
