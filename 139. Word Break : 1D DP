@@ -1,0 +1,24 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+		        
+				# 1) create a hash
+        # caching to check the status whether word break took place
+        dp = [False] * (len(s) + 1)
+				# base case 
+        dp[len(s)] = True
+
+        for i in range(len(s) - 1, -1, -1):
+            for w in wordDict:
+
+                # 2 conditions to check whether the word is present in wordDict
+                # length of the word, i + len(w) samller or equal to len(s)
+                # word has to be identical, s[i : i + len(w)] -> returns "code" or "leet"
+                if (i + len(w)) <= len(s) and s[i : i + len(w)] == w:
+                    dp[i] = dp[i + len(w)]
+                
+                # if  d[i] is true, we already found a word from the loop based on the current index
+                # hence, break out of the small loop and move onto the nexxt index
+                if dp[i]:
+                    break
+
+        return dp[0]
