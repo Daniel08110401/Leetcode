@@ -1,0 +1,18 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        goal = len(nums) - 1 #the location of the goal
+
+        # O(n)
+
+        # len(nums) - 2 as the goal is currently at the last index
+        # looping through in reverse order
+        for i in range(len(nums) - 2, -1, -1):
+
+            # nums[i] -> jump length
+            # i -> current location of the element within the nums
+            # false condition : jump length is less than distance between the goal and the current element
+            # nums[i] >= goal - i ===> jump length is equal or longer than the distance between the element and the goal
+            # as it is possible to reach, we will shift the goal
+            if nums[i] >= goal - i:
+                goal = i
+        return goal == 0
